@@ -7,11 +7,6 @@ package com.github.shriyog.algorithms.searching;
  */
 public class JumpSearch {
 
-	public static void main(String[] args) {
-		int[] input = { 2, 4, 5, 7, 8, 9, 10 };
-		System.out.println(jumpSearch(input, 1));
-	}
-
 	public static int jumpSearch(int[] input, int key) {
 
 		int blockSize = (int) Math.floor(Math.sqrt(input.length));

@@ -7,11 +7,6 @@ package com.github.shriyog.algorithms.searching;
  */
 public class ExponentialSearch {
 
-	public static void main(String[] args) {
-		int[] input = { 2, 4, 5, 7, 8, 9, 10 };
-		System.out.println(exponentialSearch(input, 90));
-	}
-
 	public static int exponentialSearch(int[] input, int key) {
 
 		if (input[0] == key)

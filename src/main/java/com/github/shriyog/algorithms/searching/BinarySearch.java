@@ -7,12 +7,6 @@ package com.github.shriyog.algorithms.searching;
  */
 public class BinarySearch {
 
-	public static void main(String[] args) {
-		int[] input = { 2, 4, 5, 7, 8, 9, 10 };
-		System.out.println(binarySearch(input, 4));
-		System.out.println(binarySearchRecursive(input, 7, 0, input.length - 1));
-	}
-
 	public static int binarySearch(int[] input, int key) {
 
 		int left = 0, right = input.length - 1, mid = 0;
@@ -42,7 +36,7 @@ public class BinarySearch {
 			return binarySearchRecursive(input, key, mid + 1, right);
 		else
 			return mid;
-		
+
 	}
 
 }
