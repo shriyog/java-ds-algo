@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * @author Shriyog Ingale 17-Oct-2018
+ * @author Shriyog Ingale 10-Jan-2018
  */
 public class BinaryTree implements Tree {
 
@@ -24,7 +24,6 @@ public class BinaryTree implements Tree {
 
 		while (!queue.isEmpty()) {
 			current = queue.remove();
-
 			if (current.getLeft() == null) {
 				current.setLeft(new TreeNode(element));
 				break;
@@ -39,7 +38,6 @@ public class BinaryTree implements Tree {
 				queue.add(current.getRight());
 			}
 		}
-
 	}
 
 	public List<Integer> inOrder() {
