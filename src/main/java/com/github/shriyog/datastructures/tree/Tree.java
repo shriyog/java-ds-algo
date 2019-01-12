@@ -9,6 +9,8 @@ public interface Tree {
 
 	void add(int element);
 
+	void remove(int element);
+
 	List<Integer> inOrder();
 
 	List<Integer> preOrder();
