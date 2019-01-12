@@ -40,6 +40,41 @@ public class BinaryTree implements Tree {
 		}
 	}
 
+	/**
+	 * Removes specified node by replacing its data with the last node's data
+	 * and then deleting last node. Using BFS to find parent of last node.
+	 */
+	public void remove(int element) {
+		TreeNode target = null;
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(this.root);
+		TreeNode current = root, previous = current, lastParent = null;
+
+		while (!queue.isEmpty()) {
+			previous = current;
+			current = queue.remove();
+			if (current.getElement() == element)
+				target = current;
+			if (current.getLeft() == null && current.getRight() == null && lastParent == null) {
+				lastParent = previous;
+			}
+			if (current.getLeft() != null) {
+				queue.add(current.getLeft());
+			}
+			if (current.getRight() != null) {
+				queue.add(current.getRight());
+			}
+		}
+
+		if (lastParent.getRight() != null) {
+			target.setElement(lastParent.getRight().getElement());
+			lastParent.setRight(null);
+		} else {
+			target.setElement(lastParent.getLeft().getElement());
+			lastParent.setLeft(null);
+		}
+	}
+
 	public List<Integer> inOrder() {
 		List<Integer> list = new ArrayList<Integer>();
 		inOrderRecursive(this.root, list);
