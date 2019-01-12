@@ -55,4 +55,31 @@ public class TreeTest {
 		System.out.println("LevelOrder: " + tree.breadthFirst());
 		Assert.assertArrayEquals(expected, tree.breadthFirst().toArray());
 	}
+
+	@Test
+	public void testAdd() {
+		tree = new BinaryTree();
+		tree.add(1);
+		tree.add(2);
+		tree.add(3);
+		tree.add(4);
+		tree.add(5);
+		Integer[] expected = { 1, 2, 3, 4, 5 };
+		Assert.assertArrayEquals(expected, tree.breadthFirst().toArray());
+	}
+
+	@Test
+	public void testRemove() {
+		tree.remove(2);
+		Integer[] expected = { 1, 5, 3, 4 };
+		Assert.assertArrayEquals(expected, tree.breadthFirst().toArray());
+
+		tree.remove(3);
+		Integer[] expected2 = { 1, 5, 4 };
+		Assert.assertArrayEquals(expected2, tree.breadthFirst().toArray());
+
+		tree.remove(1);
+		Integer[] expected3 = { 4, 5 };
+		Assert.assertArrayEquals(expected3, tree.breadthFirst().toArray());
+	}
 }
