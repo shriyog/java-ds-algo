@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author Shriyog Ingale 10-Jan-2018
@@ -75,21 +76,7 @@ public class BinaryTree implements Tree {
 		}
 	}
 
-	public List<Integer> inOrder() {
-		List<Integer> list = new ArrayList<Integer>();
-		inOrderRecursive(this.root, list);
-		return list;
-	}
-
-	private void inOrderRecursive(TreeNode root, List<Integer> list) {
-		if (root != null) {
-			inOrderRecursive(root.getLeft(), list);
-			list.add(root.getElement());
-			inOrderRecursive(root.getRight(), list);
-		}
-	}
-
-	public List<Integer> preOrder() {
+	public List<Integer> preOrderRecursive() {
 		List<Integer> list = new ArrayList<Integer>();
 		preOrderRecursive(this.root, list);
 		return list;
@@ -103,7 +90,21 @@ public class BinaryTree implements Tree {
 		}
 	}
 
-	public List<Integer> postOrder() {
+	public List<Integer> inOrderRecursive() {
+		List<Integer> list = new ArrayList<Integer>();
+		inOrderRecursive(this.root, list);
+		return list;
+	}
+
+	private void inOrderRecursive(TreeNode root, List<Integer> list) {
+		if (root != null) {
+			inOrderRecursive(root.getLeft(), list);
+			list.add(root.getElement());
+			inOrderRecursive(root.getRight(), list);
+		}
+	}
+
+	public List<Integer> postOrderRecursive() {
 		List<Integer> list = new ArrayList<Integer>();
 		postOrderRecursive(this.root, list);
 		return list;
@@ -134,5 +135,50 @@ public class BinaryTree implements Tree {
 			}
 		}
 		return list;
+	}
+
+	public List<Integer> preOrderIterative() {
+		List<Integer> list = new ArrayList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode current = root;
+
+		while (true) {
+			while (current != null) {
+				list.add(current.getElement());
+				stack.push(current);
+				current = current.getLeft();
+			}
+			if (stack.isEmpty())
+				break;
+			current = stack.pop();
+			current = current.getRight();
+		}
+		return list;
+	}
+
+	public List<Integer> inOrderIterative() {
+		List<Integer> list = new ArrayList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode current = root;
+
+		while (true) {
+			while (current != null) {
+				stack.push(current);
+				current = current.getLeft();
+			}
+			if (stack.isEmpty())
+				break;
+			current = stack.pop();
+			list.add(current.getElement());
+			current = current.getRight();
+		}
+		return list;
+	}
+
+	/**
+	 * TODO Implementation
+	 */
+	public List<Integer> postOrderIterative() {
+		return null;
 	}
 }

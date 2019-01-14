@@ -11,11 +11,17 @@ public interface Tree {
 
 	void remove(int element);
 
-	List<Integer> inOrder();
+	List<Integer> inOrderRecursive();
 
-	List<Integer> preOrder();
+	List<Integer> inOrderIterative();
 
-	List<Integer> postOrder();
+	List<Integer> preOrderRecursive();
+
+	List<Integer> preOrderIterative();
+
+	List<Integer> postOrderRecursive();
+
+	List<Integer> postOrderIterative();
 
 	List<Integer> breadthFirst();
 

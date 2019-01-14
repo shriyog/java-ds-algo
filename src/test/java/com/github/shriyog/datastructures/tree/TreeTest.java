@@ -28,27 +28,44 @@ public class TreeTest {
 		tree.root.getLeft().setRight(new TreeNode(5));
 	}
 
+	// Recursive depth first traversals
 	@Test
-	public void testPreOrderTraversal() {
+	public void testPreOrderRecursiveTraversal() {
 		Integer[] expected = { 1, 2, 4, 5, 3 };
-		System.out.println("PreOrder: " + tree.preOrder());
-		Assert.assertArrayEquals(expected, tree.preOrder().toArray());
+		System.out.println("PreOrder: " + tree.preOrderRecursive());
+		Assert.assertArrayEquals(expected, tree.preOrderRecursive().toArray());
 	}
 
 	@Test
-	public void testInOrderTraversal() {
+	public void testInOrderRecursiveTraversal() {
 		Integer[] expected = { 4, 2, 5, 1, 3 };
-		System.out.println("InOrder: " + tree.inOrder());
-		Assert.assertArrayEquals(expected, tree.inOrder().toArray());
+		System.out.println("InOrder: " + tree.inOrderRecursive());
+		Assert.assertArrayEquals(expected, tree.inOrderRecursive().toArray());
 	}
 
 	@Test
-	public void testPostOrderTraversal() {
+	public void testPostOrderRecursiveTraversal() {
 		Integer[] expected = { 4, 5, 2, 3, 1 };
-		System.out.println("PostOrder: " + tree.postOrder());
-		Assert.assertArrayEquals(expected, tree.postOrder().toArray());
+		System.out.println("PostOrder: " + tree.postOrderRecursive());
+		Assert.assertArrayEquals(expected, tree.postOrderRecursive().toArray());
 	}
 
+	// Iterative depth first traversals
+	@Test
+	public void testPreOrderIterativeTraversal() {
+		Integer[] expected = { 1, 2, 4, 5, 3 };
+		System.out.println("PreOrder: " + tree.preOrderIterative());
+		Assert.assertArrayEquals(expected, tree.preOrderIterative().toArray());
+	}
+
+	@Test
+	public void testInOrderIterativeTraversal() {
+		Integer[] expected = { 4, 2, 5, 1, 3 };
+		System.out.println("InOrder: " + tree.inOrderIterative());
+		Assert.assertArrayEquals(expected, tree.inOrderIterative().toArray());
+	}
+
+	// Breadth first traversal
 	@Test
 	public void testBreadthFirstTraversal() {
 		Integer[] expected = { 1, 2, 3, 4, 5 };
