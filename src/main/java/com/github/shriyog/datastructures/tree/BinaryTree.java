@@ -11,7 +11,7 @@ import java.util.Stack;
  */
 public class BinaryTree implements Tree {
 
-	public TreeNode root;
+	private TreeNode root;
 
 	public void add(int element) {
 		if (root == null) {
@@ -39,6 +39,25 @@ public class BinaryTree implements Tree {
 				queue.add(current.getRight());
 			}
 		}
+	}
+
+	public boolean contains(int element) {
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		TreeNode current;
+		while (!queue.isEmpty()) {
+			current = queue.remove();
+			if (current.getElement() == element) {
+				return true;
+			}
+			if (current.getLeft() != null) {
+				queue.add(current.getLeft());
+			}
+			if (current.getRight() != null) {
+				queue.add(current.getRight());
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -118,25 +137,6 @@ public class BinaryTree implements Tree {
 		}
 	}
 
-	public List<Integer> breadthFirst() {
-		List<Integer> list = new ArrayList<Integer>();
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		TreeNode current;
-		queue.add(this.root);
-		while (!queue.isEmpty()) {
-			current = queue.remove();
-			list.add(current.getElement());
-
-			if (current.getLeft() != null) {
-				queue.add(current.getLeft());
-			}
-			if (current.getRight() != null) {
-				queue.add(current.getRight());
-			}
-		}
-		return list;
-	}
-
 	public List<Integer> preOrderIterative() {
 		List<Integer> list = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
@@ -180,5 +180,24 @@ public class BinaryTree implements Tree {
 	 */
 	public List<Integer> postOrderIterative() {
 		return null;
+	}
+
+	public List<Integer> breadthFirst() {
+		List<Integer> list = new ArrayList<Integer>();
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		TreeNode current;
+		queue.add(this.root);
+		while (!queue.isEmpty()) {
+			current = queue.remove();
+			list.add(current.getElement());
+
+			if (current.getLeft() != null) {
+				queue.add(current.getLeft());
+			}
+			if (current.getRight() != null) {
+				queue.add(current.getRight());
+			}
+		}
+		return list;
 	}
 }

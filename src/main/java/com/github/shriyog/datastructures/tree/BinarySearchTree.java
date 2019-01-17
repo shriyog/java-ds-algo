@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * @author Shriyog Ingale 15-Jan-2019
  */
-public class BinarySearchTree {
+public class BinarySearchTree implements Tree {
 
 	private TreeNode root;
 
@@ -24,7 +24,7 @@ public class BinarySearchTree {
 			} else if (element > current.getElement()) {
 				current = current.getRight();
 			} else {
-				// Element exists
+				// element already exists
 				return;
 			}
 		}
@@ -54,49 +54,25 @@ public class BinarySearchTree {
 		return false;
 	}
 
-	public int findMin() {
-		if (root == null)
-			return -1;
-
-		TreeNode current = root;
-		while (current.getLeft() != null) {
-			current = current.getLeft();
-		}
-		return current.getElement();
-	}
-
-	public int findMax() {
-		if (root == null)
-			return -1;
-
-		TreeNode current = root;
-		while (current.getRight() != null) {
-			current = current.getRight();
-		}
-		return current.getElement();
-	}
-
 	public void remove(int element) {
 		if (root == null) {
 			return;
 		}
-
-		TreeNode current = root, parent = root;
-		// Find the element to be removed
+		TreeNode current = root, parent = root, childAttachment = null;
+		// find the element to be removed
 		while (current != null) {
-			parent = current;
 			if (element == current.getElement()) {
 				break;
 			} else if (element < current.getElement()) {
+				parent = current;
 				current = current.getLeft();
 			} else {
+				parent = current;
 				current = current.getRight();
 			}
 		}
-
 		if (current == null) {
 			System.out.println("Element doesn't exists");
-			// Element doesn't exists
 			return;
 		}
 
@@ -108,53 +84,36 @@ public class BinarySearchTree {
 				prev = tmp;
 				tmp = tmp.getRight();
 			}
-			current.setElement(tmp.getElement());
-			if (tmp.getElement() > prev.getElement())
-				prev.setRight(null);
-			else
+			if (tmp.getElement() < prev.getElement())
 				prev.setLeft(null);
-
+			else
+				prev.setRight(null);
+			current.setElement(tmp.getElement());
+			return;
 		} else if (current.getLeft() != null) {
 			// left child present
-			if (current.getElement() < parent.getElement()) {
-				parent.setLeft(current.getLeft());
-			} else {
-				parent.setRight(current.getLeft());
-			}
+			childAttachment = current.getLeft();
 		} else if (current.getRight() != null) {
 			// right child present
-			if (current.getElement() < parent.getElement()) {
-				parent.setLeft(current.getLeft());
-			} else {
-				parent.setRight(current.getLeft());
-			}
+			childAttachment = current.getRight();
 		} else {
 			// no child present
-			if (current.getElement() < parent.getElement()) {
-				parent.setLeft(null);
-			} else {
-				parent.setRight(null);
-			}
+			childAttachment = null;
+		}
+
+		// attach childAttachment to parent
+		if (current.getElement() < parent.getElement()) {
+			parent.setLeft(childAttachment);
+		} else {
+			parent.setRight(childAttachment);
 		}
 	}
 
-	public static void main(String[] args) {
-		BinarySearchTree bst = new BinarySearchTree();
-		bst.add(20);
-		bst.add(10);
-		bst.add(30);
-		bst.add(5);
-		bst.add(15);
-		bst.add(25);
-		bst.add(50);
-		bst.add(15);
-
-		System.out.println(bst.inOrderIterative());
-		bst.remove(10);
-		System.out.println(bst.inOrderIterative());
-
-	}
-
+	/**
+	 * Iterative depth first inorder traversal.
+	 * 
+	 * @return list of element in BST which is already sorted.
+	 */
 	public List<Integer> inOrderIterative() {
 		List<Integer> list = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
@@ -173,5 +132,4 @@ public class BinarySearchTree {
 		}
 		return list;
 	}
-
 }
