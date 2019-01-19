@@ -18,19 +18,64 @@ public class ArrayHeapTest {
 
 	@Test
 	public void testAdd() {
+		Assert.assertEquals(-1, heap.peek());
 		heap.add(30);
+		Assert.assertEquals(30, heap.peek());
 		heap.add(20);
+		Assert.assertEquals(20, heap.peek());
 		heap.add(40);
+		Assert.assertEquals(20, heap.peek());
+		heap.add(25);
+		Assert.assertEquals(20, heap.peek());
+		heap.add(10);
+		heap.add(10);
+		Assert.assertEquals(10, heap.peek());
+	}
+
+	@Test
+	public void testPeekWhenEmpty() {
+		Assert.assertEquals(-1, heap.peek());
 	}
 
 	@Test
 	public void testPeek() {
-		Assert.assertEquals(20, heap.peek());
+		heap.add(30);
+		Assert.assertEquals(30, heap.peek());
+		heap.add(10);
+		Assert.assertEquals(10, heap.peek());
+	}
+
+	@Test
+	public void testPollWhenEmpty() {
+		Assert.assertEquals(-1, heap.poll());
 	}
 
 	@Test
 	public void testPoll() {
+		heap.add(30);
+		Assert.assertEquals(30, heap.poll());
+		Assert.assertEquals(-1, heap.poll());
+
+		heap.add(30);
+		heap.add(20);
+		heap.add(40);
+		heap.add(25);
+		heap.add(10);
+
+		Assert.assertEquals(10, heap.poll());
 		Assert.assertEquals(20, heap.peek());
+
+		Assert.assertEquals(20, heap.poll());
+		Assert.assertEquals(25, heap.peek());
+
+		Assert.assertEquals(25, heap.poll());
+		Assert.assertEquals(30, heap.peek());
+
+		Assert.assertEquals(30, heap.poll());
+		Assert.assertEquals(40, heap.peek());
+
+		Assert.assertEquals(40, heap.poll());
+		Assert.assertEquals(-1, heap.peek());
 	}
 
 }
