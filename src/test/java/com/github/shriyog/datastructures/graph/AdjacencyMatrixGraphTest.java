@@ -1,5 +1,11 @@
 package com.github.shriyog.datastructures.graph;
 
+import java.util.AbstractMap.SimpleEntry;
+import java.util.HashSet;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +26,16 @@ public class AdjacencyMatrixGraphTest {
 		graph.addVertex('A');
 		graph.addVertex('B');
 		graph.addVertex('C');
+
+		Character[] expectedVertices = { 'A', 'B', 'C' };
+		Assert.assertArrayEquals(expectedVertices, graph.getVertices().toArray());
+	}
+
+	@Test
+	public void testAddEdge() {
+		graph.addVertex('A');
+		graph.addVertex('B');
+		graph.addVertex('C');
 		graph.addVertex('D');
 
 		graph.addEdge('A', 'B');
@@ -29,8 +45,13 @@ public class AdjacencyMatrixGraphTest {
 		graph.addEdge('B', 'C');
 
 		graph.printGraph();
-		System.out.println();
 
-		graph.getEdges().stream().forEach(entry -> System.out.println(entry.getKey() + " -> " + entry.getValue()));
+		Set<Entry<Character, Character>> expectedEdges = new HashSet<>();
+		expectedEdges.add(new SimpleEntry<>('A', 'B'));
+		expectedEdges.add(new SimpleEntry<>('A', 'D'));
+		expectedEdges.add(new SimpleEntry<>('C', 'D'));
+		expectedEdges.add(new SimpleEntry<>('C', 'A'));
+		expectedEdges.add(new SimpleEntry<>('B', 'C'));
+		Assert.assertArrayEquals(expectedEdges.toArray(), graph.getEdges().toArray());
 	}
 }
