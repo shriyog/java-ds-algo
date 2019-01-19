@@ -15,11 +15,7 @@ import java.util.stream.Collectors;
  */
 public class AdjacencyMatrixGraph implements Graph {
 
-	private Map<Character, Map<Character, Integer>> matrix;
-
-	public AdjacencyMatrixGraph() {
-		matrix = new HashMap<Character, Map<Character, Integer>>();
-	}
+	private Map<Character, Map<Character, Integer>> matrix = new HashMap<>();
 
 	public void addVertex(char vertex) {
 		Map<Character, Integer> elements = new HashMap<Character, Integer>();

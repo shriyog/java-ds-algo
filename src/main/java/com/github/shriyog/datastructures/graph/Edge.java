@@ -34,5 +34,4 @@ public class Edge {
 	public String toString() {
 		return this.destination.getElement();
 	}
-
 }

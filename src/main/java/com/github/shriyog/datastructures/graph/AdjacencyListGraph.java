@@ -1,24 +1,23 @@
 package com.github.shriyog.datastructures.graph;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * @author Shriyog Ingale 19-Jan-2019
  */
 public class AdjacencyListGraph {
 
-	Map<Vertex, List<Edge>> vertices;
-
-	public AdjacencyListGraph() {
-		vertices = new HashMap<>();
-	}
+	private Map<Vertex, List<Edge>> vertices = new HashMap<>();
 
 	void addVertex(String element) {
-		Vertex vertex = new Vertex(element);
-		vertices.put(vertex, new ArrayList<>());
+		vertices.put(new Vertex(element), new ArrayList<>());
 	}
 
 	void addEdge(String start, String end, int weight) {
@@ -26,22 +25,25 @@ public class AdjacencyListGraph {
 		edges.add(new Edge(weight, new Vertex(end)));
 	}
 
-	void printGraph() {
-		vertices.entrySet().stream().forEach(System.out::println);
+	Set<Vertex> getVertices() {
+		return vertices.keySet();
 	}
 
-	public static void main(String[] args) {
-		AdjacencyListGraph graph = new AdjacencyListGraph();
-		graph.addVertex("A");
-		graph.addVertex("B");
-		graph.addVertex("C");
-		graph.addVertex("D");
-		graph.addEdge("A", "B", 1);
-		graph.addEdge("A", "D", 1);
-		graph.addEdge("B", "C", 1);
-		graph.addEdge("C", "D", 1);
-		graph.addEdge("C", "A", 1);
+	Set<Entry<Vertex, Vertex>> getEdges() {
+		Set<Entry<Vertex, Vertex>> edgeSet = new HashSet<>();
+		for (Entry<Vertex, List<Edge>> entry : vertices.entrySet()) {
+			for (Edge edge : entry.getValue()) {
+				edgeSet.add(new SimpleEntry<>(entry.getKey(), edge.getDestination()));
+			}
+		}
+		return edgeSet;
+	}
 
-		graph.printGraph();
+	void printGraph() {
+		for (Entry<Vertex, List<Edge>> entry : vertices.entrySet()) {
+			for (Edge edge : entry.getValue()) {
+				System.out.println(entry.getKey() + " -> " + edge.getDestination());
+			}
+		}
 	}
 }

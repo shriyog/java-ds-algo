@@ -21,12 +21,9 @@ public class Vertex {
 
 	@Override
 	public boolean equals(Object other) {
-		if (other == null)
-			return false;
-		Vertex otherVertex;
 		if (other instanceof Vertex) {
-			otherVertex = (Vertex) other;
-			return this.getElement().equalsIgnoreCase(otherVertex.getElement());
+			Vertex vertex = (Vertex) other;
+			return this.element.equalsIgnoreCase(vertex.element);
 		} else
 			return false;
 	}
