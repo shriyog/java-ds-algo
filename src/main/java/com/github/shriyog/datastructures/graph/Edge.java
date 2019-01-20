@@ -9,7 +9,6 @@ public class Edge {
 	private Vertex destination;
 
 	public Edge(int weight, Vertex destination) {
-		super();
 		this.weight = weight;
 		this.destination = destination;
 	}
