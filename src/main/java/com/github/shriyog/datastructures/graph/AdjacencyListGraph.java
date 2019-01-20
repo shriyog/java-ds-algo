@@ -1,8 +1,14 @@
 package com.github.shriyog.datastructures.graph;
 
 import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -66,5 +72,49 @@ public class AdjacencyListGraph {
 				System.out.println(current + " -> " + edge.getDestination());
 			}
 		}
+	}
+
+	List<Vertex> breadthFirstTraversal() {
+		List<Vertex> result = new ArrayList<>();
+		Queue<Vertex> queue = new LinkedList<>();
+		root.setChecked();
+		queue.add(root);
+		Vertex current;
+		while (!queue.isEmpty()) {
+			current = queue.poll();
+			result.add(current);
+			for (Edge edge : current.getEdges()) {
+				Vertex vertex = edge.getDestination();
+				if (!vertex.isChecked()) {
+					vertex.setChecked();
+					queue.add(vertex);
+				}
+			}
+		}
+		return result;
+	}
+
+	List<Vertex> depthFirstTraversal() {
+		List<Vertex> result = new ArrayList<>();
+		Deque<Vertex> stack = new ArrayDeque<>();
+		root.setChecked();
+		stack.push(root);
+		Vertex current;
+		while (!stack.isEmpty()) {
+			current = stack.pop();
+			result.add(current);
+			for (Edge edge : current.getEdges()) {
+				Vertex vertex = edge.getDestination();
+				if (!vertex.isChecked()) {
+					vertex.setChecked();
+					stack.push(vertex);
+				}
+			}
+		}
+		return result;
+	}
+
+	void deleteGraph() {
+		this.root = this.last = null;
 	}
 }
