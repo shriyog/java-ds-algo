@@ -76,8 +76,9 @@ public class AdjacencyListGraph {
 
 	List<Vertex> breadthFirstTraversal() {
 		List<Vertex> result = new ArrayList<>();
+		Set<Vertex> visited = new HashSet<>();
 		Queue<Vertex> queue = new LinkedList<>();
-		root.setChecked();
+		visited.add(root);
 		queue.add(root);
 		Vertex current;
 		while (!queue.isEmpty()) {
@@ -85,8 +86,8 @@ public class AdjacencyListGraph {
 			result.add(current);
 			for (Edge edge : current.getEdges()) {
 				Vertex vertex = edge.getDestination();
-				if (!vertex.isChecked()) {
-					vertex.setChecked();
+				if (!visited.contains(vertex)) {
+					visited.add(vertex);
 					queue.add(vertex);
 				}
 			}
@@ -96,8 +97,9 @@ public class AdjacencyListGraph {
 
 	List<Vertex> depthFirstTraversal() {
 		List<Vertex> result = new ArrayList<>();
+		Set<Vertex> visited = new HashSet<>();
 		Deque<Vertex> stack = new ArrayDeque<>();
-		root.setChecked();
+		visited.add(root);
 		stack.push(root);
 		Vertex current;
 		while (!stack.isEmpty()) {
@@ -105,8 +107,8 @@ public class AdjacencyListGraph {
 			result.add(current);
 			for (Edge edge : current.getEdges()) {
 				Vertex vertex = edge.getDestination();
-				if (!vertex.isChecked()) {
-					vertex.setChecked();
+				if (!visited.contains(vertex)) {
+					visited.add(vertex);
 					stack.push(vertex);
 				}
 			}
