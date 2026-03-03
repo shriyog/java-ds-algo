@@ -1,7 +1,5 @@
 # java-ds-algo
 
-[![Build Status](https://travis-ci.org/shriyog/java-ds-algo.svg?branch=master)](https://travis-ci.org/shriyog/java-ds-algo)
-
 A Test-Driven Development (TDD) based implementation of fundamental Data Structures and Algorithms in Java.
 
 ## Table of Contents
